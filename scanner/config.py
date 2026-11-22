@@ -199,6 +199,8 @@ WORKDAY = [
     _w("broadridge", "wd5", "Careers", "Broadridge", 3),
     _w("philips", "wd3", "jobs-and-careers", "Philips", 3),
 ]
-WORKDAY_QUERIES = ["java", "backend", "scala", "kotlin", "payments engineer"]
-WORKDAY_MAX_PAGES = 5            # 20 per page, per query
+WORKDAY_QUERIES = ["java", "backend", "scala"]
+WORKDAY_MAX_PAGES = 3            # 20 per page, per query
+WORKDAY_MIN_INTERVAL_S = 0.5    # Workday rate-limits per IP across all companies
+WORKDAY_DETAIL_CAP = 25          # per company
 DETAIL_FETCH_CAP_PER_COMPANY = 60

@@ -6,7 +6,12 @@ list_jobs(company) -> list of raw dicts:
   desc(str|None), salary(str|None)
 detail(company, raw) -> fills desc / locations / url for feeds whose list view is thin.
 """
-from ..util import html_to_text, session, to_iso, find_salary
+import threading
+import time
+
+import requests
+
+from ..util import UA, html_to_text, session, to_iso, find_salary
 from .. import config
 
 
@@ -170,9 +175,8 @@ class Workday:
         out, seen = [], set()
         for q in config.WORKDAY_QUERIES:
             for page in range(config.WORKDAY_MAX_PAGES):
-                r = s.post(api, json={"appliedFacets": {}, "limit": 20, "offset": page * 20, "searchText": q},
-                           headers={"Accept": "application/json", "Content-Type": "application/json"}, timeout=40)
-                r.raise_for_status()
+                r = _wd_call("POST", api, json={"appliedFacets": {}, "limit": 20, "offset": page * 20, "searchText": q},
+                             headers={"Accept": "application/json", "Content-Type": "application/json"})
                 posts = r.json().get("jobPostings", [])
                 for j in posts:
                     path = j.get("externalPath")
@@ -192,9 +196,8 @@ class Workday:
 
     def detail(self, c, raw):
         path = raw.pop("_path")
-        r = session().get(f"{self._base(c)}/wday/cxs/{c['token']}/{c['site']}{path}",
-                          headers={"Accept": "application/json"}, timeout=40)
-        r.raise_for_status()
+        r = _wd_call("GET", f"{self._base(c)}/wday/cxs/{c['token']}/{c['site']}{path}",
+                     headers={"Accept": "application/json"})
         info = r.json().get("jobPostingInfo") or {}
         locs = [info.get("location") or ""] + list(info.get("additionalLocations") or [])
         if (info.get("country") or {}).get("descriptor"):
@@ -208,6 +211,34 @@ class Workday:
         if info.get("canApply") is False:
             raw["closed"] = True
         return raw
+
+
+_wd_lock = threading.Lock()
+_wd_last = [0.0]
+_wd_session = requests.Session()
+_wd_session.headers.update({"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"})
+
+
+def _wd_call(method, url, **kw):
+    """Workday rate-limits per IP across all its tenants: one request at a time, paced,
+    with a long back-off on 429 instead of hammering."""
+    for attempt in range(4):
+        with _wd_lock:
+            wait = config.WORKDAY_MIN_INTERVAL_S - (time.monotonic() - _wd_last[0])
+            if wait > 0:
+                time.sleep(wait)
+            try:
+                r = _wd_session.request(method, url, timeout=40, **kw)
+            finally:
+                _wd_last[0] = time.monotonic()
+            if r.status_code == 429 or r.status_code >= 500:
+                retry_after = r.headers.get("Retry-After", "")
+                time.sleep(int(retry_after) if retry_after.isdigit() else 20 * (attempt + 1))
+                continue
+        r.raise_for_status()
+        return r
+    r.raise_for_status()
+    return r
 
 
 def _wd_posted(s):

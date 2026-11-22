@@ -78,7 +78,8 @@ def scan_company(feed, c, registers):
             vague = any("location" in (l or "").lower() for l in raw["locations"])
             if part is None and not vague:
                 continue
-            if details >= config.DETAIL_FETCH_CAP_PER_COMPANY:
+            cap = config.WORKDAY_DETAIL_CAP if feed.name == "workday" else config.DETAIL_FETCH_CAP_PER_COMPANY
+            if details >= cap:
                 continue
             details += 1
             try:
@@ -114,10 +115,21 @@ def main(argv=None):
 
     only = {x for x in args.only.split(",") if x}
     tasks = [(feed, c) for key, (feed, cs) in FEEDS.items() if not only or key in only for c in cs]
+    use_linkedin = config.LINKEDIN_ENABLED and not args.no_linkedin and (not only or "linkedin" in only)
 
-    with ThreadPoolExecutor(10) as ex:
-        reg_future = ex.submit(registers.load)
-        futs = {ex.submit(scan_company, feed, c, registers): (feed, c) for feed, c in tasks}
+    # Three lanes run side by side: fast ATS boards, Workday (paced, it rate-limits per IP),
+    # and LinkedIn (slow and polite). Results are merged afterwards.
+    li_jobs: dict[str, dict] = {}
+    with ThreadPoolExecutor(8) as ex, ThreadPoolExecutor(2) as wd_ex, ThreadPoolExecutor(2) as side:
+        reg_future = side.submit(registers.load)
+        li_future = None
+        if use_linkedin:
+            def _li():
+                reg_future.result()
+                return run_linkedin(li_jobs, prev, registers)
+            li_future = side.submit(_li)
+        futs = {(wd_ex if feed.name == "workday" else ex).submit(scan_company, feed, c, registers): (feed, c)
+                for feed, c in tasks}
         for f in as_completed(futs):
             feed, c = futs[f]
             key = f"{feed.name}:{c['token']}"
@@ -131,6 +143,8 @@ def main(argv=None):
                 status["sources"][key] = {"company": c["name"], "ok": False, "error": f"{e.__class__.__name__}: {str(e)[:120]}"}
                 print(f"[warn] {key} failed: {e}", file=sys.stderr)
         reg_future.result()
+        if li_future:
+            status["linkedin"] = li_future.result()
     status["registers"] = registers.status
 
     # A company board that errored this run keeps yesterday's jobs (outage != closed), for up to 2 days.
@@ -141,8 +155,12 @@ def main(argv=None):
             jobs[j["id"]] = j
             carried.add(j["id"])
 
-    if config.LINKEDIN_ENABLED and not args.no_linkedin:
-        status["linkedin"] = run_linkedin(jobs, prev, registers)
+    if use_linkedin:
+        # Same role on a company board and on LinkedIn: keep the company-board copy.
+        ats_keys = {(norm(j["company"]), norm(j["title"])) for j in jobs.values()}
+        for pid, j in li_jobs.items():
+            if (norm(j["company"]), norm(j["title"])) not in ats_keys:
+                jobs[pid] = j
     elif not only:
         # LinkedIn skipped this run: keep recently verified LinkedIn jobs as they were.
         for pid, pj in prev.items():
@@ -187,7 +205,6 @@ def main(argv=None):
 
 def run_linkedin(jobs, prev, registers):
     li = LinkedIn()
-    ats_keys = {(norm(j["company"]), norm(j["title"])) for j in jobs.values()}
     stats = {"found": 0, "checked": 0, "closed": 0, "kept": 0, "rechecked_old": 0}
     budget = config.LINKEDIN_MAX_DETAIL_FETCHES
     seen_ids = set()
@@ -200,8 +217,8 @@ def run_linkedin(jobs, prev, registers):
             break
         if not title_ok(raw["title"]) or blocked(raw["company"]):
             continue
-        if (norm(raw["company"]), norm(raw["title"])) in ats_keys:
-            continue
+        if norm(raw["company"]) in _KNOWN:
+            continue  # this company's own board is scanned directly
         if (age_days(raw.get("posted_at")) or 0) > config.LINKEDIN_MAX_AGE_DAYS:
             continue
         part, _ = geo.classify_many(raw["locations"])
