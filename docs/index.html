@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Job Radar</title>
+<meta name="description" content="Open backend roles matched to my profile — South India and visa-sponsored abroad.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Job Radar">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f7fb" media="(prefers-color-scheme: light)">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Job Radar</h1>
+    <button id="statusBtn" class="status" aria-label="Scan status"><span class="dot"></span><span id="scanAge">loading…</span></button>
+  </div>
+  <div class="seg" role="tablist">
+    <button role="tab" data-tab="india" class="on">South India <b id="cIndia">–</b></button>
+    <button role="tab" data-tab="abroad">Abroad + visa <b id="cAbroad">–</b></button>
+  </div>
+  <input id="q" type="search" placeholder="Search title, company, skill…" autocomplete="off" enterkeyhint="search">
+  <div id="places" class="chips scroll"></div>
+  <div class="chips scroll" id="toggles">
+    <button data-t="new" class="chip">New</button>
+    <button data-t="saved" class="chip">Saved</button>
+    <button data-t="applied" class="chip">Applied</button>
+    <button data-t="sponsor" class="chip abroad-only">Visa stated</button>
+    <button data-t="nous" class="chip abroad-only on">Hide US</button>
+    <button data-t="hidden" class="chip">Hidden</button>
+    <select id="sort" class="chip" aria-label="Sort">
+      <option value="score">Best match</option>
+      <option value="new">Newest</option>
+    </select>
+  </div>
+</header>
+
+<main id="list" aria-live="polite"></main>
+<p id="empty" class="empty" hidden>Nothing matches these filters.</p>
+
+<dialog id="statusDlg">
+  <form method="dialog">
+    <h2>Last scan</h2>
+    <div id="statusBody"></div>
+    <button class="btn">Close</button>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
