@@ -11,7 +11,7 @@ import time
 
 import requests
 
-from ..util import UA, html_to_text, session, to_iso, find_salary
+from ..util import UA, deadline_passed, html_to_text, session, to_iso, find_salary
 from .. import config
 
 
@@ -219,24 +219,34 @@ _wd_session = requests.Session()
 _wd_session.headers.update({"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"})
 
 
+class WorkdayBlocked(Exception):
+    pass
+
+
+_wd_429_streak = [0]
+
+
 def _wd_call(method, url, **kw):
-    """Workday rate-limits per IP across all its tenants: one request at a time, paced,
-    with a long back-off on 429 instead of hammering."""
-    for attempt in range(4):
-        with _wd_lock:
-            wait = config.WORKDAY_MIN_INTERVAL_S - (time.monotonic() - _wd_last[0])
-            if wait > 0:
-                time.sleep(wait)
-            try:
-                r = _wd_session.request(method, url, timeout=40, **kw)
-            finally:
-                _wd_last[0] = time.monotonic()
-            if r.status_code == 429 or r.status_code >= 500:
-                retry_after = r.headers.get("Retry-After", "")
-                time.sleep(int(retry_after) if retry_after.isdigit() else 20 * (attempt + 1))
-                continue
-        r.raise_for_status()
-        return r
+    """Workday rate-limits per IP across all its tenants, and often blocks cloud (GitHub) IPs
+    outright. One request at a time, paced; after a few 429s in a row Workday is switched off
+    for the rest of the scan so it can never hold up publishing."""
+    with _wd_lock:
+        if _wd_429_streak[0] >= config.WORKDAY_BREAKER_429S:
+            raise WorkdayBlocked("Workday is rate-limiting this machine; skipped for this scan")
+        if deadline_passed(config.WORKDAY_BUDGET_MIN):
+            raise WorkdayBlocked("Workday time budget used up for this scan")
+        wait = config.WORKDAY_MIN_INTERVAL_S - (time.monotonic() - _wd_last[0])
+        if wait > 0:
+            time.sleep(wait)
+        try:
+            r = _wd_session.request(method, url, timeout=30, **kw)
+        finally:
+            _wd_last[0] = time.monotonic()
+        if r.status_code == 429:
+            _wd_429_streak[0] += 1
+            time.sleep(5)
+        else:
+            _wd_429_streak[0] = 0
     r.raise_for_status()
     return r
 

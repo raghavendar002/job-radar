@@ -12,6 +12,19 @@ UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 
 _local = threading.local()
 
+_START = [None]
+
+
+def start_clock():
+    import time
+    _START[0] = time.monotonic()
+
+
+def deadline_passed(minutes: float) -> bool:
+    """True once this scan has been running longer than `minutes`."""
+    import time
+    return _START[0] is not None and (time.monotonic() - _START[0]) > minutes * 60
+
 
 def session() -> requests.Session:
     """One retrying session per thread."""
@@ -19,7 +32,7 @@ def session() -> requests.Session:
     if s is None:
         s = requests.Session()
         retry = Retry(total=3, backoff_factor=2, status_forcelist=(429, 500, 502, 503, 504),
-                      allowed_methods=frozenset(["GET", "POST"]), respect_retry_after_header=True)
+                      allowed_methods=frozenset(["GET", "POST"]), respect_retry_after_header=False)
         s.mount("https://", HTTPAdapter(max_retries=retry, pool_maxsize=16))
         s.headers.update({"User-Agent": UA, "Accept-Language": "en-US,en;q=0.9"})
         _local.s = s

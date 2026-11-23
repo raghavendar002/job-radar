@@ -8,7 +8,7 @@ import re
 import time
 
 from .. import config
-from ..util import html_to_text, session, to_iso, find_salary
+from ..util import deadline_passed, html_to_text, session, to_iso, find_salary
 
 SEARCH = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
 DETAIL = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/{id}"
@@ -32,9 +32,13 @@ class LinkedIn:
     def __init__(self):
         self.requests = 0
         self.blocked = False
+        self.timed_out = False
 
     def _get(self, url, **kw):
         if self.blocked:
+            return None
+        if deadline_passed(config.LINKEDIN_BUDGET_MIN):
+            self.blocked = self.timed_out = True  # stop here; publish what we have
             return None
         time.sleep(random.uniform(1.2, 2.4))
         self.requests += 1

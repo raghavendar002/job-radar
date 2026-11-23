@@ -203,4 +203,9 @@ WORKDAY_QUERIES = ["java", "backend", "scala"]
 WORKDAY_MAX_PAGES = 3            # 20 per page, per query
 WORKDAY_MIN_INTERVAL_S = 0.5    # Workday rate-limits per IP across all companies
 WORKDAY_DETAIL_CAP = 25          # per company
+WORKDAY_BREAKER_429S = 4         # this many 429s in a row = Workday is blocking us; stop for this scan
+WORKDAY_BUDGET_MIN = 15          # Workday gets at most this many minutes per scan
+
+# Whole scan must finish well inside GitHub's job timeout so results always get published.
+LINKEDIN_BUDGET_MIN = 25
 DETAIL_FETCH_CAP_PER_COMPANY = 60

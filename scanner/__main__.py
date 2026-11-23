@@ -14,12 +14,16 @@ from . import config, geo, visa
 from .scoring import score, title_ok
 from .sources.ats import FEEDS
 from .sources.linkedin import LinkedIn
-from .util import age_days, norm, now_iso
+from .util import age_days, norm, now_iso, start_clock
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
 
 _KNOWN = {norm(c["name"]): c for _, cs in FEEDS.values() for c in cs}
+# Companies LinkedIn can skip because their own board is reliably read from the cloud.
+# Workday often blocks GitHub's IPs, so its companies are still searched on LinkedIn
+# (duplicates are removed after both finish).
+_SKIP_ON_LINKEDIN = {norm(c["name"]) for key, (_, cs) in FEEDS.items() if key != "workday" for c in cs}
 
 
 def blocked(company: str) -> bool:
@@ -99,6 +103,7 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     t0 = time.time()
+    start_clock()
     DATA.mkdir(parents=True, exist_ok=True)
     prev = {}
     try:
@@ -217,7 +222,7 @@ def run_linkedin(jobs, prev, registers):
             break
         if not title_ok(raw["title"]) or blocked(raw["company"]):
             continue
-        if norm(raw["company"]) in _KNOWN:
+        if norm(raw["company"]) in _SKIP_ON_LINKEDIN:
             continue  # this company's own board is scanned directly
         if (age_days(raw.get("posted_at")) or 0) > config.LINKEDIN_MAX_AGE_DAYS:
             continue
@@ -264,7 +269,8 @@ def run_linkedin(jobs, prev, registers):
         elif (age_days(pj.get("last_verified")) or 99) < 1.5:
             jobs[pid] = pj  # couldn't check this run; still fresh enough
     stats["requests"] = li.requests
-    stats["blocked"] = li.blocked
+    stats["blocked"] = li.blocked and not li.timed_out
+    stats["timed_out"] = li.timed_out
     return stats
 
 
