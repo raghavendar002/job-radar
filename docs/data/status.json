@@ -3,37 +3,37 @@
   "greenhouse:twilio": {
    "company": "Twilio",
    "ok": true,
-   "listed": 109,
+   "listed": 115,
    "matched": 5
-  },
-  "greenhouse:brex": {
-   "company": "Brex",
-   "ok": true,
-   "listed": 248,
-   "matched": 4
-  },
-  "greenhouse:airbnb": {
-   "company": "Airbnb",
-   "ok": true,
-   "listed": 199,
-   "matched": 2
-  },
-  "greenhouse:coinbase": {
-   "company": "Coinbase",
-   "ok": true,
-   "listed": 251,
-   "matched": 10
   },
   "greenhouse:robinhood": {
    "company": "Robinhood",
    "ok": true,
-   "listed": 163,
+   "listed": 159,
    "matched": 8
+  },
+  "greenhouse:airbnb": {
+   "company": "Airbnb",
+   "ok": true,
+   "listed": 198,
+   "matched": 3
+  },
+  "greenhouse:brex": {
+   "company": "Brex",
+   "ok": true,
+   "listed": 260,
+   "matched": 4
+  },
+  "greenhouse:coinbase": {
+   "company": "Coinbase",
+   "ok": true,
+   "listed": 250,
+   "matched": 10
   },
   "greenhouse:dropbox": {
    "company": "Dropbox",
    "ok": true,
-   "listed": 47,
+   "listed": 54,
    "matched": 6
   },
   "greenhouse:discord": {
@@ -45,7 +45,7 @@
   "greenhouse:datadog": {
    "company": "Datadog",
    "ok": true,
-   "listed": 386,
+   "listed": 383,
    "matched": 5
   },
   "greenhouse:figma": {
@@ -54,53 +54,52 @@
    "listed": 148,
    "matched": 3
   },
-  "greenhouse:stripe": {
-   "company": "Stripe",
-   "ok": true,
-   "listed": 780,
-   "matched": 21
-  },
-  "greenhouse:pinterest": {
-   "company": "Pinterest",
-   "ok": true,
-   "listed": 172,
-   "matched": 0
-  },
-  "greenhouse:lyft": {
-   "company": "Lyft",
-   "ok": true,
-   "listed": 145,
-   "matched": 2
-  },
-  "greenhouse:okta": {
-   "company": "Okta",
-   "ok": true,
-   "listed": 374,
-   "matched": 13
-  },
-  "greenhouse:mongodb": {
-   "company": "MongoDB",
-   "ok": true,
-   "listed": 418,
-   "matched": 20
-  },
-  "greenhouse:instacart": {
-   "company": "Instacart",
-   "ok": true,
-   "listed": 92,
-   "matched": 3
+  "workday:nvidia": {
+   "company": "NVIDIA",
+   "ok": false,
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSi"
   },
   "greenhouse:reddit": {
    "company": "Reddit",
    "ok": true,
-   "listed": 149,
+   "listed": 147,
    "matched": 7
   },
-  "greenhouse:sofi": {
-   "company": "SoFi",
+  "greenhouse:stripe": {
+   "company": "Stripe",
    "ok": true,
-   "listed": 52,
+   "listed": 771,
+   "matched": 22
+  },
+  "greenhouse:okta": {
+   "company": "Okta",
+   "ok": true,
+   "listed": 371,
+   "matched": 14
+  },
+  "greenhouse:lyft": {
+   "company": "Lyft",
+   "ok": true,
+   "listed": 144,
    "matched": 2
+  },
+  "greenhouse:pinterest": {
+   "company": "Pinterest",
+   "ok": true,
+   "listed": 171,
+   "matched": 0
+  },
+  "greenhouse:mongodb": {
+   "company": "MongoDB",
+   "ok": true,
+   "listed": 421,
+   "matched": 19
+  },
+  "greenhouse:instacart": {
+   "company": "Instacart",
+   "ok": true,
+   "listed": 96,
+   "matched": 3
   },
   "greenhouse:n26": {
    "company": "N26",
@@ -114,15 +113,16 @@
    "listed": 18,
    "matched": 0
   },
-  "workday:paypal": {
-   "company": "PayPal",
-   "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://paypal.wd1.myworkdayjobs.com/wday/cxs/paypal/jobs/jobs"
+  "greenhouse:sofi": {
+   "company": "SoFi",
+   "ok": true,
+   "listed": 56,
+   "matched": 2
   },
   "greenhouse:chime": {
    "company": "Chime",
    "ok": true,
-   "listed": 80,
+   "listed": 81,
    "matched": 2
   },
   "greenhouse:gocardless": {
@@ -137,29 +137,34 @@
    "listed": 53,
    "matched": 4
   },
+  "workday:paypal": {
+   "company": "PayPal",
+   "ok": false,
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://paypal.wd1.myworkdayjobs.com/wday/cxs/paypal/jobs/jobs"
+  },
   "greenhouse:databricks": {
    "company": "Databricks",
    "ok": true,
-   "listed": 889,
+   "listed": 883,
    "matched": 26
-  },
-  "greenhouse:affirm": {
-   "company": "Affirm",
-   "ok": true,
-   "listed": 218,
-   "matched": 34
-  },
-  "greenhouse:adyen": {
-   "company": "Adyen",
-   "ok": true,
-   "listed": 244,
-   "matched": 11
   },
   "greenhouse:cloudflare": {
    "company": "Cloudflare",
    "ok": true,
-   "listed": 505,
+   "listed": 504,
    "matched": 0
+  },
+  "greenhouse:affirm": {
+   "company": "Affirm",
+   "ok": true,
+   "listed": 221,
+   "matched": 30
+  },
+  "greenhouse:adyen": {
+   "company": "Adyen",
+   "ok": true,
+   "listed": 243,
+   "matched": 11
   },
   "greenhouse:razorpaysoftwareprivatelimited": {
    "company": "Razorpay",
@@ -176,19 +181,19 @@
   "greenhouse:intercom": {
    "company": "Intercom",
    "ok": true,
-   "listed": 118,
+   "listed": 122,
    "matched": 2
   },
   "greenhouse:solarisbank": {
    "company": "Solaris",
    "ok": true,
-   "listed": 20,
+   "listed": 19,
    "matched": 1
   },
   "greenhouse:rubrik": {
    "company": "Rubrik",
    "ok": true,
-   "listed": 219,
+   "listed": 218,
    "matched": 6
   },
   "greenhouse:raisin": {
@@ -200,14 +205,20 @@
   "greenhouse:sumup": {
    "company": "SumUp",
    "ok": true,
-   "listed": 327,
+   "listed": 320,
    "matched": 16
   },
   "greenhouse:inmobi": {
    "company": "InMobi",
    "ok": true,
-   "listed": 71,
+   "listed": 70,
    "matched": 1
+  },
+  "greenhouse:bitpanda": {
+   "company": "Bitpanda",
+   "ok": true,
+   "listed": 39,
+   "matched": 4
   },
   "greenhouse:contentful": {
    "company": "Contentful",
@@ -218,14 +229,13 @@
   "greenhouse:toast": {
    "company": "Toast",
    "ok": true,
-   "listed": 324,
-   "matched": 12
+   "listed": 312,
+   "matched": 14
   },
-  "greenhouse:bitpanda": {
-   "company": "Bitpanda",
-   "ok": true,
-   "listed": 39,
-   "matched": 4
+  "workday:mastercard": {
+   "company": "Mastercard",
+   "ok": false,
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://mastercard.wd1.myworkdayjobs.com/wday/cxs/mastercard/CorporateCaree"
   },
   "greenhouse:trivago": {
    "company": "trivago",
@@ -236,7 +246,7 @@
   "greenhouse:doordashusa": {
    "company": "DoorDash",
    "ok": true,
-   "listed": 409,
+   "listed": 406,
    "matched": 5
   },
   "greenhouse:tide": {
@@ -254,7 +264,19 @@
   "greenhouse:hellofresh": {
    "company": "HelloFresh",
    "ok": true,
-   "listed": 373,
+   "listed": 371,
+   "matched": 2
+  },
+  "greenhouse:squarespace": {
+   "company": "Squarespace",
+   "ok": true,
+   "listed": 20,
+   "matched": 0
+  },
+  "greenhouse:asana": {
+   "company": "Asana",
+   "ok": true,
+   "listed": 109,
    "matched": 2
   },
   "greenhouse:flix": {
@@ -263,33 +285,22 @@
    "listed": 185,
    "matched": 5
   },
-  "greenhouse:squarespace": {
-   "company": "Squarespace",
-   "ok": true,
-   "listed": 21,
-   "matched": 0
-  },
-  "greenhouse:asana": {
-   "company": "Asana",
-   "ok": true,
-   "listed": 110,
-   "matched": 2
-  },
   "greenhouse:duolingo": {
    "company": "Duolingo",
    "ok": true,
-   "listed": 54,
+   "listed": 53,
    "matched": 0
   },
-  "workday:mastercard": {
-   "company": "Mastercard",
-   "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://mastercard.wd1.myworkdayjobs.com/wday/cxs/mastercard/CorporateCaree"
+  "lever:spotify": {
+   "company": "Spotify",
+   "ok": true,
+   "listed": 88,
+   "matched": 7
   },
   "greenhouse:celonis": {
    "company": "Celonis",
    "ok": true,
-   "listed": 264,
+   "listed": 260,
    "matched": 5
   },
   "lever:cred": {
@@ -298,35 +309,22 @@
    "listed": 12,
    "matched": 0
   },
-  "greenhouse:agoda": {
-   "company": "Agoda",
-   "ok": true,
-   "listed": 333,
-   "matched": 0
-  },
-  "lever:spotify": {
-   "company": "Spotify",
-   "ok": true,
-   "listed": 90,
-   "matched": 7
-  },
   "lever:meesho": {
    "company": "Meesho",
    "ok": true,
    "listed": 48,
    "matched": 1
   },
-  "greenhouse:roblox": {
-   "company": "Roblox",
+  "greenhouse:samsara": {
+   "company": "Samsara",
    "ok": true,
-   "listed": 259,
-   "matched": 7
+   "listed": 287,
+   "matched": 3
   },
-  "greenhouse:anthropic": {
-   "company": "Anthropic",
-   "ok": true,
-   "listed": 634,
-   "matched": 0
+  "workday:salesforce": {
+   "company": "Salesforce",
+   "ok": false,
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://salesforce.wd12.myworkdayjobs.com/wday/cxs/salesforce/External_Care"
   },
   "lever:zeta": {
    "company": "Zeta",
@@ -334,40 +332,28 @@
    "listed": 33,
    "matched": 0
   },
-  "greenhouse:samsara": {
-   "company": "Samsara",
+  "greenhouse:anthropic": {
+   "company": "Anthropic",
    "ok": true,
-   "listed": 296,
-   "matched": 2
-  },
-  "lever:fampay": {
-   "company": "FamPay",
-   "ok": true,
-   "listed": 13,
+   "listed": 631,
    "matched": 0
   },
-  "lever:nium": {
-   "company": "Nium",
+  "greenhouse:roblox": {
+   "company": "Roblox",
    "ok": true,
-   "listed": 31,
-   "matched": 0
+   "listed": 256,
+   "matched": 7
   },
-  "lever:palantir": {
-   "company": "Palantir",
+  "lever:wealthfront": {
+   "company": "Wealthfront",
    "ok": true,
-   "listed": 307,
-   "matched": 11
+   "listed": 20,
+   "matched": 1
   },
-  "lever:paytm": {
-   "company": "Paytm",
+  "greenhouse:agoda": {
+   "company": "Agoda",
    "ok": true,
-   "listed": 190,
-   "matched": 0
-  },
-  "lever:outreach": {
-   "company": "Outreach",
-   "ok": true,
-   "listed": 17,
+   "listed": 334,
    "matched": 0
   },
   "lever:mindtickle": {
@@ -376,17 +362,53 @@
    "listed": 19,
    "matched": 0
   },
+  "lever:outreach": {
+   "company": "Outreach",
+   "ok": true,
+   "listed": 17,
+   "matched": 0
+  },
+  "lever:paytm": {
+   "company": "Paytm",
+   "ok": true,
+   "listed": 190,
+   "matched": 0
+  },
+  "lever:palantir": {
+   "company": "Palantir",
+   "ok": true,
+   "listed": 306,
+   "matched": 11
+  },
+  "lever:fampay": {
+   "company": "FamPay",
+   "ok": true,
+   "listed": 13,
+   "matched": 0
+  },
   "ashby:linear": {
    "company": "Linear",
    "ok": true,
-   "listed": 32,
+   "listed": 30,
    "matched": 0
   },
-  "greenhouse:coupang": {
-   "company": "Coupang",
+  "lever:nium": {
+   "company": "Nium",
    "ok": true,
-   "listed": 675,
-   "matched": 1
+   "listed": 31,
+   "matched": 0
+  },
+  "ashby:ramp": {
+   "company": "Ramp",
+   "ok": true,
+   "listed": 181,
+   "matched": 2
+  },
+  "ashby:notion": {
+   "company": "Notion",
+   "ok": true,
+   "listed": 172,
+   "matched": 0
   },
   "ashby:modal": {
    "company": "Modal",
@@ -400,34 +422,11 @@
    "listed": 38,
    "matched": 0
   },
-  "ashby:ramp": {
-   "company": "Ramp",
-   "ok": true,
-   "listed": 186,
-   "matched": 2
-  },
-  "workday:nvidia": {
-   "company": "NVIDIA",
-   "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://nvidia.wd5.myworkdayjobs.com/wday/cxs/nvidia/NVIDIAExternalCareerSi"
-  },
-  "ashby:plaid": {
-   "company": "Plaid",
-   "ok": true,
-   "listed": 146,
-   "matched": 1
-  },
   "ashby:sentry": {
    "company": "Sentry",
    "ok": true,
    "listed": 42,
-   "matched": 3
-  },
-  "ashby:notion": {
-   "company": "Notion",
-   "ok": true,
-   "listed": 170,
-   "matched": 0
+   "matched": 2
   },
   "ashby:replit": {
    "company": "Replit",
@@ -435,29 +434,35 @@
    "listed": 38,
    "matched": 0
   },
-  "ashby:docker": {
-   "company": "Docker",
-   "ok": true,
-   "listed": 50,
-   "matched": 0
-  },
   "ashby:synthesia": {
    "company": "Synthesia",
    "ok": true,
-   "listed": 27,
+   "listed": 26,
+   "matched": 0
+  },
+  "ashby:docker": {
+   "company": "Docker",
+   "ok": true,
+   "listed": 46,
    "matched": 0
   },
   "ashby:cursor": {
    "company": "Cursor",
    "ok": true,
-   "listed": 89,
+   "listed": 87,
    "matched": 1
   },
-  "ashby:n8n": {
-   "company": "n8n",
+  "greenhouse:coupang": {
+   "company": "Coupang",
    "ok": true,
-   "listed": 69,
-   "matched": 0
+   "listed": 677,
+   "matched": 1
+  },
+  "ashby:plaid": {
+   "company": "Plaid",
+   "ok": true,
+   "listed": 145,
+   "matched": 1
   },
   "ashby:perplexity": {
    "company": "Perplexity",
@@ -471,11 +476,17 @@
    "listed": 20,
    "matched": 1
   },
+  "ashby:n8n": {
+   "company": "n8n",
+   "ok": true,
+   "listed": 69,
+   "matched": 0
+  },
   "ashby:clickhouse": {
    "company": "ClickHouse",
    "ok": true,
-   "listed": 205,
-   "matched": 15
+   "listed": 209,
+   "matched": 14
   },
   "ashby:alan": {
    "company": "Alan",
@@ -486,7 +497,7 @@
   "ashby:doctolib": {
    "company": "Doctolib",
    "ok": true,
-   "listed": 147,
+   "listed": 146,
    "matched": 8
   },
   "ashby:pennylane": {
@@ -495,11 +506,10 @@
    "listed": 205,
    "matched": 0
   },
-  "ashby:openai": {
-   "company": "OpenAI",
-   "ok": true,
-   "listed": 850,
-   "matched": 1
+  "workday:adobe": {
+   "company": "Adobe",
+   "ok": false,
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://adobe.wd5.myworkdayjobs.com/wday/cxs/adobe/external_experienced/job"
   },
   "smartrecruiters:Swiggy": {
    "company": "Swiggy",
@@ -513,10 +523,16 @@
    "listed": 78,
    "matched": 0
   },
-  "workday:salesforce": {
-   "company": "Salesforce",
+  "ashby:openai": {
+   "company": "OpenAI",
+   "ok": true,
+   "listed": 855,
+   "matched": 1
+  },
+  "workday:capitalone": {
+   "company": "Capital One",
    "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://salesforce.wd12.myworkdayjobs.com/wday/cxs/salesforce/External_Care"
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://capitalone.wd12.myworkdayjobs.com/wday/cxs/capitalone/Capital_One/j"
   },
   "smartrecruiters:DeliveryHero": {
    "company": "Delivery Hero",
@@ -524,54 +540,30 @@
    "listed": 113,
    "matched": 9
   },
-  "workday:capitalone": {
-   "company": "Capital One",
+  "workday:ms": {
+   "company": "Morgan Stanley",
    "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://capitalone.wd12.myworkdayjobs.com/wday/cxs/capitalone/Capital_One/j"
-  },
-  "lever:wealthfront": {
-   "company": "Wealthfront",
-   "ok": true,
-   "listed": 20,
-   "matched": 1
-  },
-  "smartrecruiters:ServiceNow": {
-   "company": "ServiceNow",
-   "ok": true,
-   "listed": 403,
-   "matched": 14
-  },
-  "workday:adobe": {
-   "company": "Adobe",
-   "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://adobe.wd5.myworkdayjobs.com/wday/cxs/adobe/external_experienced/job"
-  },
-  "smartrecruiters:Grab": {
-   "company": "Grab",
-   "ok": true,
-   "listed": 241,
-   "matched": 19
+   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://ms.wd5.myworkdayjobs.com/wday/cxs/ms/External/jobs"
   },
   "workday:workday": {
    "company": "Workday",
    "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://workday.wd5.myworkdayjobs.com/wday/cxs/workday/Workday/jobs"
+   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
   "workday:intel": {
    "company": "Intel",
    "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://intel.wd1.myworkdayjobs.com/wday/cxs/intel/External/jobs"
+   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
   "workday:target": {
    "company": "Target",
    "ok": false,
-   "error": "HTTPError: 429 Client Error: Too Many Requests for url: https://target.wd5.myworkdayjobs.com/wday/cxs/target/targetcareers/jobs"
+   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
-  "workday:ms": {
-   "company": "Morgan Stanley",
-   "ok": true,
-   "listed": 107,
-   "matched": 4
+  "workday:wf": {
+   "company": "Wells Fargo",
+   "ok": false,
+   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
   "workday:citi": {
    "company": "Citi",
@@ -590,11 +582,6 @@
   },
   "workday:db": {
    "company": "Deutsche Bank",
-   "ok": false,
-   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
-  },
-  "workday:lseg": {
-   "company": "LSEG",
    "ok": false,
    "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
@@ -638,20 +625,31 @@
    "ok": false,
    "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
   },
-  "workday:wf": {
-   "company": "Wells Fargo",
+  "workday:lseg": {
+   "company": "LSEG",
+   "ok": false,
+   "error": "WorkdayBlocked: Workday is rate-limiting this machine; skipped for this scan"
+  },
+  "smartrecruiters:ServiceNow": {
+   "company": "ServiceNow",
    "ok": true,
-   "listed": 71,
-   "matched": 0
+   "listed": 403,
+   "matched": 11
+  },
+  "smartrecruiters:Grab": {
+   "company": "Grab",
+   "ok": true,
+   "listed": 242,
+   "matched": 19
   }
  },
  "linkedin": {
-  "found": 883,
+  "found": 882,
   "checked": 220,
   "closed": 0,
-  "kept": 106,
+  "kept": 104,
   "rechecked_old": 0,
-  "requests": 337,
+  "requests": 335,
   "blocked": false,
   "timed_out": false
  },
@@ -659,16 +657,16 @@
   "uk_register": 126245,
   "nl_register": 12955
  },
- "generated_at": "2026-11-23T16:44:13+00:00",
- "duration_s": 856,
+ "generated_at": "2026-11-24T02:47:30+00:00",
+ "duration_s": 1015,
  "counts": {
-  "india": 174,
+  "india": 151,
   "abroad": 250
  },
  "new": {
-  "india": 26,
-  "abroad": 13
+  "india": 3,
+  "abroad": 29
  },
- "boards_ok": 89,
+ "boards_ok": 87,
  "boards_total": 111
 }
